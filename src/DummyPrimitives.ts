@@ -10,8 +10,8 @@ async function cryptKeyGen(): Promise<NRKeyPair> {
 async function signKeyGen(): Promise<NRKeyPair> {
   const key = Math.floor(Math.random() * 16777215).toString(16)
   return {
-    privKey: `cryptPrivKey-${key}`,
-    pubKey: `cryptPubKey-${key}`
+    privKey: `signPrivKey-${key}`,
+    pubKey: `signPubKey-${key}`
   }
 }
 
@@ -30,7 +30,11 @@ async function decrypt(
   keyPair: NRKeyPair,
   ciphertext: string
 ): Promise<string> {
-  return ciphertext.replace(`encrypted:${keyPair.pubKey}:`, '')
+  const plaintext = ciphertext.replace(`encrypted:${keyPair.pubKey}:`, '')
+  if (plaintext === ciphertext) {
+    throw new Error('Error decrypting')
+  }
+  return plaintext
 }
 
 async function cryptTransform(
@@ -39,7 +43,8 @@ async function cryptTransform(
 ): Promise<string> {
   const [, , plaintext] = ciphertext.split(':')
   const [, , pubKey] = transformKey.split(':')
-  return encrypt(pubKey, plaintext) // NOTE: real primitive SHOULD NOT DECRYPT
+  const transformed = encrypt(pubKey, plaintext) // NOTE: real primitive SHOULD NOT DECRYPT
+  return transformed
 }
 
 async function sign(keyPair: NRKeyPair, text: string): Promise<string> {

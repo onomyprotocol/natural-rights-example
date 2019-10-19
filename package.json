@@ -1,6 +1,6 @@
 {
   "name": "@natural-rights/example",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Natural Rights library examples/tests",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -17,7 +17,7 @@
     "fix:prettier": "prettier \"src/**/*.ts\" --write",
     "fix:tslint": "tslint --fix --project .",
     "test": "run-s test:*",
-    "test:lint": "tslint --project . && prettier \"src/**/*.ts\" --list-different",
+    "test:lint": "tslint --project .",
     "test:unit": "jest",
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
     "doc": "run-s doc:html && open-cli build/docs/index.html",
@@ -45,7 +45,7 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "@natural-rights/client": "git+ssh@gitlab.com:nodehaven/natural-rights-client.git#v0.0.4",
+    "@natural-rights/client": "git+ssh@gitlab.com:nodehaven/natural-rights-client.git#v0.1.0",
     "@natural-rights/recrypt": "git+ssh://gitlab.com/nodehaven/natural-rights-recrypt.git#v0.4.0",
     "@natural-rights/service": "git+ssh://gitlab.com/nodehaven/natural-rights-service.git#v0.0.2",
     "mkdirp": "^0.5.1",
